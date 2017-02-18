@@ -173,7 +173,7 @@ ApplicantIncome
 
 # 把ApplicantIncome分为10段，分别观察不同ApplicantIncome与Loan_Status的关系
 ```
-![](raw/figure_3.png?raw=true)
+![](raw/figure_4.png?raw=true)
 
 ## 3. 数据清洗
 ### 3.1 缺省值处理
@@ -324,4 +324,8 @@ for i in predictions:
 result = pd.DataFrame({'Loan_ID':test['Loan_ID'].as_matrix(),'Loan_Status':predictions_copy})
 result.to_csv('predictions_LR.csv',index=False)
 ```
+
+- 结果
+
+
 ![](raw/figure_5.png?raw=true)
