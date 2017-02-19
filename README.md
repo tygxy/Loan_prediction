@@ -329,3 +329,30 @@ result.to_csv('predictions_LR.csv',index=False)
 
 
 ![](raw/figure_5.png?raw=true)
+
+- 评估
+```python
+from sklearn.ensemble import RandomForestClassifier
+rf = RandomForestClassifier(criterion='gini',n_estimators=700,min_samples_split=10,							min_samples_leaf=1,max_features='auto',oob_score=True,random_state=1,n_jobs=-1)
+
+rf.fit(train_X,train_y)
+predictions = rf.predict(test_X)
+print metrics.accuracy_score(predictions,test_y)
+
+print pd.concat((pd.DataFrame(train_df.iloc[:, 0:].columns, columns = ['variable']), 
+           pd.DataFrame(rf.feature_importances_, columns = ['importance'])), 
+          axis = 1).sort_values(by='importance', ascending = False)[:10]
+	  
+                   variable  importance
+4        Credit_History_0.0    0.256992
+3        Credit_History_1.0    0.143791
+0           ApplicantIncome    0.131018
+2                LoanAmount    0.125969
+1         CoapplicantIncome    0.093354
+5        Credit_History_NaN    0.026692
+21      Property_Area_Rural    0.020012
+22  Property_Area_Semiurban    0.019684
+15   Education_Not Graduate    0.015524
+10             Dependents_0    0.015419
+
+```
